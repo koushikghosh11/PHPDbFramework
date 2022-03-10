@@ -1,0 +1,19 @@
+{
+    "name": "koushik01/phpdbframework",
+    "description": "easy to use framework for phpmyadmin maria db",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Koushik01\\Phpdbframework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Koushik",
+            "email": "dev.koushik.ghosh@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {}
+}
