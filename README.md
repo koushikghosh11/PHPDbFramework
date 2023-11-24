@@ -32,7 +32,7 @@ if they will intersect then there exist a node that is common.
 - Time Complexity: O(n+m)O(n+m)O(n+m)
 - Space Complexity: O(1)O(1)O(1)
 
-## Code
+## Code: Java
 ```java
  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
     ListNode node1 = headA, node2 = headB;
