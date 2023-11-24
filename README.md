@@ -1,62 +1,49 @@
-# PHP MySQL Database Operations Library
+## Leetcode - 160 Intersection of Two Linked Lists Using Two Pointer:
 
-This PHP library, **MySQLDbOps**, provides a set of classes and functions to simplify common database operations when working with MySQL databases. It offers a convenient way to connect to a MySQL database, perform CRUD (Create, Read, Update, Delete) operations, and manage database tables.
+We can use TwoPointerTwo PointerTwoPointer algorithm to find intersected node.
 
-## Features
+## Mathematics:
+Consider the following Linked List(LL) Structure:
 
-- **Database Connection**: The `DbConnection` class establishes a secure connection to a MySQL database using PDO, making it easy to connect and manage your database credentials.
+`A-->B-->C-->D--|`
 
-- **Table Operations**: The `DbOperation` class extends `DbConnection` and provides methods for common table operations, including resetting a table, altering table settings, and setting the default table for operations.
+`...............|-->E-->F-->G`
 
-- **Data Retrieval**: Easily retrieve data from your MySQL database with the `get` method. You can specify columns, conditions, ordering, and limits.
+`.......H-->L-->|`
 
-- **Data Insertion**: Insert data into your database with the `insert` method, which handles parameter binding and hashing of sensitive data, such as passwords.
+Here, head of first LL is `A` and head of second LL is `H`
+Both intersect at node `E`
 
-- **Data Updating**: Update existing records in your database using the `update` method. It allows you to specify the columns to update and the conditions for the update.
+Let distance from node `A` to `D` is `x` and distance from node `H` to `L` is `y`.
+Distance from node `E` to `G` is common and it is `z`.
 
-- **Data Deletion**: Delete records from your database with the `delete` method, specifying the conditions for deletion.
+During first traversal of LL1 and LL2, they will cover distance:
+for LL1 pointer --> `x+z`
+for LL2 pointer --> `y+z`
 
-- **Password Verification**: Verify user passwords securely using the `passwdVerify` method, which hashes and compares passwords.
+When the pointers inerchange their position in second traversal then distance covered till D and L are same :
+for LL1 pointer --> `x+z+y`
+for LL2 pointer --> `y+z+x`
 
-- **Error Handling**: The library includes error handling for database operations, ensuring that any issues are gracefully handled and reported.
+if they will intersect then there exist a node that is common.
 
-## How to Use
+## Complexity
 
-1. Include the `DbConnection.php` and `DbOperation.php` files in your PHP project.
+- Time Complexity: O(n+m)O(n+m)O(n+m)
+- Space Complexity: O(1)O(1)O(1)
 
-2. Create an instance of the `DbOperation` class, specifying the necessary database connection details.
+## Code
+```java
+ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    ListNode node1 = headA, node2 = headB;
+    int count = 0; // maintain count of traversal
+    while(count<2){
+        if(node1==node2) return node1;
+        if(node1.next==null) ++count; // if no match after traversing twice then LL will not intersect.
+        node1 = node1.next==null?headB:node1.next;
+        node2 = node2.next==null?headA:node2.next;
+    }
 
-3. Use the provided methods to perform various database operations, such as retrieving data, inserting records, updating data, and deleting records.
-
-```php
-// Example usage:
-$database = new MySQLDbOps\DbOperation('localhost', 'username', 'password', 'database_name');
-$data = $database->get('column1, column2', ['condition' => 'value'], 'table_name', 'column1 ASC', '10');
-```
-
-4. Handle errors gracefully using try-catch blocks to capture exceptions thrown during database operations.
-
-```php
-try {
-    // Perform database operations here
-} catch (PDOException $e) {
-    echo "Database Error: " . $e->getMessage();
+    return null;
 }
 ```
-
-## Requirements
-
-- PHP 7.0 or higher
-- MySQL database
-
-## License
-
-This library is open-source and available under the MIT License. You are free to use and modify it in your projects.
-
-## Contribution
-
-Contributions and bug reports are welcome! If you have any suggestions or encounter issues, please open an issue on GitHub or submit a pull request.
-
-**GitHub Repository**: [PHPDbFramework](https://github.com/koushikghosh11/PHPDbFramework)
-
-Enjoy simplified MySQL database operations with this library!
